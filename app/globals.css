@@ -1,0 +1,321 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 210 40% 98%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 98%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 98%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 142.1 76.2% 36.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.1%;
+    --foreground: 210 40% 98%;
+    --card: 217.2 32.6% 17.5%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.1%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 142.1 76.2% 36.3%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-500;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Force text visibility in dark mode */
+  .dark * {
+    color: inherit;
+  }
+
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark h5,
+  .dark h6 {
+    @apply !text-white;
+  }
+
+  .dark p,
+  .dark span:not([class*="bg-"]):not([class*="text-"]),
+  .dark div:not([class*="bg-"]):not([class*="text-"]),
+  .dark label {
+    @apply !text-gray-100;
+  }
+
+  .dark .text-gray-900 {
+    @apply !text-white;
+  }
+
+  .dark .text-gray-800 {
+    @apply !text-gray-100;
+  }
+
+  .dark .text-gray-700 {
+    @apply !text-gray-200;
+  }
+
+  .dark .text-gray-600 {
+    @apply !text-gray-300;
+  }
+
+  .dark .text-gray-500 {
+    @apply !text-gray-400;
+  }
+
+  /* Fix specific dark mode issues */
+  .dark [data-state="checked"] {
+    @apply !text-white;
+  }
+
+  .dark button:not([class*="bg-gradient"]):not([class*="bg-green"]):not([class*="bg-blue"]) {
+    @apply !text-gray-100;
+  }
+
+  .dark .badge {
+    @apply !text-current;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    @apply backdrop-blur-xl bg-white/90 dark:bg-gray-800/90 border border-white/20 dark:border-gray-600/30 shadow-xl;
+  }
+
+  .gradient-bg {
+    @apply bg-gradient-to-br from-blue-50 via-white to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/10 dark:hover:shadow-green-400/10 hover:-translate-y-1 hover:scale-[1.02];
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out;
+  }
+
+  .animate-bounce-gentle {
+    animation: bounceGentle 2s ease-in-out infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulseGentle 3s ease-in-out infinite;
+  }
+
+  .floating-element {
+    @apply fixed z-50 backdrop-blur-xl bg-white/95 dark:bg-gray-800/95 border border-white/20 dark:border-gray-600/30 shadow-2xl rounded-2xl;
+  }
+
+  /* ClickUp-style task cards with responsive fixes */
+  .task-card {
+    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg p-3 sm:p-4 hover:shadow-lg transition-all duration-200 w-full min-w-0;
+  }
+
+  .task-priority-high {
+    @apply border-l-4 border-l-red-500;
+  }
+
+  .task-priority-medium {
+    @apply border-l-4 border-l-yellow-500;
+  }
+
+  .task-priority-low {
+    @apply border-l-4 border-l-green-500;
+  }
+
+  .progress-bar {
+    @apply w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2;
+  }
+
+  .progress-fill {
+    @apply bg-gradient-to-r from-green-500 to-blue-500 h-2 rounded-full transition-all duration-300;
+  }
+
+  /* Responsive text utilities */
+  .text-responsive {
+    @apply text-sm sm:text-base;
+  }
+
+  .text-responsive-lg {
+    @apply text-base sm:text-lg lg:text-xl;
+  }
+
+  .text-responsive-xl {
+    @apply text-lg sm:text-xl lg:text-2xl xl:text-3xl;
+  }
+
+  /* Kanban column fixes */
+  .kanban-column {
+    @apply min-w-0 w-full;
+  }
+
+  .kanban-card {
+    @apply w-full min-w-0 break-words;
+  }
+
+  /* Calendar grid */
+  .calendar-grid {
+    @apply grid grid-cols-7 gap-0 border border-gray-200 dark:border-gray-700;
+  }
+
+  .calendar-day {
+    @apply h-20 sm:h-24 md:h-28 lg:h-32 border border-gray-200 dark:border-gray-700 p-1 sm:p-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors min-w-0;
+  }
+
+  .calendar-event {
+    @apply text-xs p-1 rounded border truncate mb-1 w-full min-w-0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceGentle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulseGentle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-500;
+}
+
+/* Input and form styling for dark mode */
+.dark input,
+.dark textarea,
+.dark select {
+  /* dark-mode inputs */
+  @apply bg-gray-800 border-gray-600 text-white placeholder-gray-400;
+}
+
+.dark input:focus,
+.dark textarea:focus,
+.dark select:focus {
+  @apply border-green-500 ring-green-500;
+}
+
+/* Responsive utilities */
+@media (max-width: 640px) {
+  .task-card {
+    @apply p-3;
+  }
+
+  .glass-effect {
+    @apply p-4;
+  }
+}
+
+@media (max-width: 768px) {
+  .kanban-column {
+    @apply min-w-[280px];
+  }
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
